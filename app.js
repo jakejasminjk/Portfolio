@@ -5,6 +5,7 @@ let bodyParser  = require("body-parser");
 let nodemailer  = require('nodemailer');
     
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
     
     
@@ -21,32 +22,48 @@ app.get('/about', function(req, res){
         res.render('about');
     });
     
-app.post('/contact-us', (req,res) => {
+app.post('/contact', (req,res) => {
     let name = req.body.name
     let clientEmail = req.body.email
     let subject = req.body.subject
     let message = req.body.message
     
-    let to = 'CLIENT EMAIL';
+    let to = 'jakejasminkj@gmail.com';
     let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'NEED CLIENTS USERNAME',
-    pass: 'NEED CLIENTS EMAIL PASSWORD'
+    user: 'jakejasminkj@gmail.com',
+    pass: '987654321kj'
   }
 });
    
      let mailOptions = {
-        from: clientEmail,
+        from: `${name} <${clientEmail}>`,
         to: to, 
         subject: subject,
         text: message
     }
-    transporter.sendMail(mailOptions, function(error, response){
+    
+    let mailConfirm = {
+        from: `Kdev <${to}>`,
+        to: clientEmail, 
+        subject: `Is this information correct? ${subject}`,
+        text: message
+    }
+    transporter.sendMail(mailOptions, (error, response) =>{
         if(error){
             console.log(error);
-        }else{
-            res.redirect('/home');
+            return res.redirect('/contact');
+        }
+        else{
+            transporter.sendMail(mailConfirm, (error, response) =>{
+               if(error){
+                return res.redirect('/contact');
+               }
+               else{
+                   res.redirect('/');   
+               }
+            });
         }
     });
     
