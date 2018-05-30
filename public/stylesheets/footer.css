@@ -1,0 +1,18 @@
+.foot{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height:40px;
+    background-color: black;
+    text-align: center;
+    color:white;
+    font-size: 16px;
+}
+
+.footB{
+    text-align: center;
+    background-color:black;
+    color: white;
+    font-size: 14px;
+}
