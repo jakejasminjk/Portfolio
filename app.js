@@ -1,16 +1,17 @@
-let express       = require("express");
-let app             = express();
-let fs             = require("fs");
-let flash          = require("connect-flash");
-let bodyParser     = require("body-parser");
-let nodemailer     = require('nodemailer');
-let passport       = require("passport");
-let LocalStrategy  = require("passport-local");
-let methodOverride = require("method-override");
-let mongoose       = require("mongoose");
-let Forum = require("./models/forum");
-let User = require("./models/user");
-let Comment = require("./models/comment");
+let express          = require("express");
+let app              = express();
+let fs               = require("fs");
+let flash            = require("connect-flash");
+let bodyParser       = require("body-parser");
+let nodemailer       = require('nodemailer');
+let passport         = require("passport");
+let LocalStrategy    = require("passport-local");
+let methodOverride   = require("method-override");
+let mongoose         = require("mongoose");
+
+let Forum            = require("./models/forum");
+let User             = require("./models/user");
+let Comment          = require("./models/comment");
 
 let commentRoutes    = require("./routes/comments");
 let forumRoutes      = require("./routes/forums");
@@ -18,7 +19,7 @@ let indexRoutes      = require("./routes/index");
 
 //let port = process.env.DATABASEURL || 'mongodb://localhost/Kdev'; 
 //mongoose.connect(port);
-mongoose.connect("mongodb://jakejasminjk:987654321jk@ds151127.mlab.com:51127/kdev");
+mongoose.connect("mongodb://kervens:kdev123@ds151127.mlab.com:51127/kdev");
 //mongoose.connect("mongodb://localhost/Kdev");
 //mongodb://jakejasminjk:987654321jk@ds151127.mlab.com:51127/kdev
 app.use(express.static(__dirname + "/public"));
