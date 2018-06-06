@@ -19,9 +19,9 @@ let indexRoutes      = require("./routes/index");
 
 //let port = process.env.DATABASEURL || 'mongodb://localhost/Kdev'; 
 //mongoose.connect(port);
-mongoose.connect("mongodb://kervens:kdev123@ds151127.mlab.com:51127/kdev");
-//mongoose.connect("mongodb://localhost/Kdev");
-//mongodb://jakejasminjk:987654321jk@ds151127.mlab.com:51127/kdev
+//mongoose.connect("mongodb://kervens:kdev123@ds151127.mlab.com:51127/kdev");
+mongoose.connect("mongodb://localhost/Kdev");
+
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
