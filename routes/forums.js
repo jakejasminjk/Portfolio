@@ -6,7 +6,7 @@ var Comment     = require("../models/comment")
 var middleware  = require("../middleware");
 
 //INDEX/get all Forum post
-router.get('/', (req,res) => {
+router.get('/forum', (req,res) => {
     Forum.find({}).then((allForums) => {
         res.render('forums/index', {forum :allForums});
     }, (err) => {
@@ -39,12 +39,12 @@ router.post("/",middleware.isLoggedIn, (req, res) => {
 });
 
 //NEW form to create new forum post
-router.get('/new',middleware.isLoggedIn, (req, res) => {
+router.get('/forum/new',middleware.isLoggedIn, (req, res) => {
    res.render('forums/new') 
 });
 
 //SHOW more info about a forum post
-router.get('/:id', (req, res) => {
+router.get('/forum/:id', (req, res) => {
    let forum = req.params.id;
    Forum.findById(forum).populate("comments").exec((err,oneForum) => {
        if(err){
@@ -57,7 +57,7 @@ router.get('/:id', (req, res) => {
 });
 
 //Edit Forum 
-router.get('/:id/edit',middleware.checkCampgroundOwnership, (req,res) => {
+router.get('/forum/:id/edit',middleware.checkCampgroundOwnership, (req,res) => {
     let forum = req.params.id;
     Forum.findById(forum).then((oneForum) => {
         res.render('forums/edit', {forum: oneForum})
@@ -68,7 +68,7 @@ router.get('/:id/edit',middleware.checkCampgroundOwnership, (req,res) => {
     });
 })
 //Update Forum
-router.put('/:id',middleware.checkCampgroundOwnership,(req, res) => {
+router.put('/forum/:id',middleware.checkCampgroundOwnership,(req, res) => {
     Forum.findByIdAndUpdate(req.params.id, req.body.forum).then((updatedForum) => {
        res.redirect('/forum/'+ req.params.id); 
     }, (err) => {
@@ -78,7 +78,7 @@ router.put('/:id',middleware.checkCampgroundOwnership,(req, res) => {
     });
 })
 //Destory Forum
-router.delete('/:id',middleware.checkCampgroundOwnership, (req, res) => {
+router.delete('/forum/:id',middleware.checkCampgroundOwnership, (req, res) => {
     Forum.findByIdAndRemove(req.params.id).then((deletedForum) => {
         if(!req.params.id){
             console.log('Forum deleted');
