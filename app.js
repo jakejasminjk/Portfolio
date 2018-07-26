@@ -48,7 +48,7 @@ app.use(function(req, res, next){
 });
 
 app.use("/", indexRoutes);
-app.use("/", forumRoutes);
+app.use("/forum", forumRoutes);
 app.use("/forum/:id/comments", commentRoutes);  
     
 //Start server
